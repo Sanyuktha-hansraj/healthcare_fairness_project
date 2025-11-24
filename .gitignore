@@ -1,0 +1,56 @@
+# Dataset files (large)
+DDI/images/*.png
+DDI/*.csv
+
+# Data
+data/raw/*
+data/processed/*
+data/interim/*
+!data/*/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Models
+models/*.pt
+models/*.h5
+models/*.pkl
+models/*.pth
+
+# Reports (keep structure)
+reports/figures/*.png
+reports/figures/*.pdf
+reports/*.csv
+!reports/*/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Streamlit
+.streamlit/
+
+# Temporary
+*.tmp
+*.swp
+*~

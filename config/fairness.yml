@@ -1,0 +1,90 @@
+# Fairness Metrics Configuration
+
+project:
+  name: "Healthcare Fairness - DDI Dermatology AI"
+  task: "Skin lesion malignancy prediction"
+  protected_attribute: "skin_tone"
+
+# Fairness metrics to evaluate
+fairness_metrics:
+  demographic_parity:
+    description: "Equal positive prediction rates across groups"
+    formula: "max(P(Ŷ=1|A=a)) - min(P(Ŷ=1|A=a))"
+    threshold: 0.1
+    interpretation: "Difference should be < 0.1 for fairness"
+    
+  equal_opportunity:
+    description: "Equal true positive rates (sensitivity) across groups"
+    formula: "max(TPR_a) - min(TPR_a)"
+    threshold: 0.1
+    interpretation: "Ensures all groups benefit equally from correct positive predictions"
+    rationale: "Critical in healthcare - all skin tones should have equal detection of malignancy"
+    
+  equalized_odds:
+    description: "Equal TPR and FPR across groups"
+    formula: "max(TPR_diff, FPR_diff)"
+    threshold: 0.1
+    interpretation: "Both error types should be balanced across groups"
+    
+  calibration_within_groups:
+    description: "Predicted probabilities match actual outcomes per group"
+    formula: "E[Y|Ŷ=p,A=a] ≈ p for all groups a"
+    threshold: 0.05
+    interpretation: "Model should be well-calibrated for each skin tone"
+
+# Demographic subgroup definitions
+subgroups:
+  skin_tone:
+    - name: "Fitzpatrick I-II (Light)"
+      value: 12
+      min_samples: 30
+      description: "Very fair to fair skin"
+      
+    - name: "Fitzpatrick III-IV (Medium)"
+      value: 34
+      min_samples: 30
+      description: "Medium to olive skin"
+      
+    - name: "Fitzpatrick V-VI (Dark)"
+      value: 56
+      min_samples: 30
+      description: "Brown to dark brown/black skin"
+  
+  outcome:
+    - name: "Benign"
+      value: 0
+      description: "Non-malignant lesion"
+      
+    - name: "Malignant"
+      value: 1
+      description: "Malignant lesion requiring treatment"
+
+# Performance metrics per group
+performance_metrics:
+  - accuracy
+  - sensitivity  # True Positive Rate
+  - specificity  # True Negative Rate
+  - auc_roc
+  - precision
+  - f1_score
+
+# Mitigation strategies (for future weeks)
+mitigation_approaches:
+  preprocessing:
+    - resampling
+    - reweighting
+  
+  inprocessing:
+    - adversarial_debiasing
+    - fairness_constraints
+  
+  postprocessing:
+    - threshold_optimization
+    - calibration_adjustment
+
+# Reporting requirements
+reporting:
+  generate_plots: true
+  save_metrics: true
+  output_location: "reports/fairness_evaluation/"
+  formats: [csv, json, markdown]

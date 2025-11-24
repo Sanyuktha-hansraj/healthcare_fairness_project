@@ -1,0 +1,45 @@
+# Feature Engineering Configuration
+
+# Metadata features
+metadata_features:
+  skin_tone:
+    type: categorical
+    encoding: one_hot
+    values: [12, 34, 56]
+    description: "Fitzpatrick skin tone scale"
+  
+  malignant:
+    type: binary
+    description: "Target variable - malignancy status"
+
+# Image statistical features
+image_features:
+  dimensions:
+    - img_width
+    - img_height
+    - img_aspect_ratio
+  
+  color_statistics:
+    channels: [red, green, blue]
+    statistics: [mean, std]
+    description: "Color channel statistics"
+
+# Feature engineering settings
+preprocessing:
+  missing_values:
+    numeric_imputation: median
+    categorical_imputation: mode
+  
+  scaling:
+    method: none  # Images already normalized in model
+    description: "Features used as-is for image-based models"
+  
+  outlier_handling:
+    method: none
+    reason: "Small dataset, preserve all samples"
+
+# Output specifications
+output:
+  format: parquet
+  compression: snappy
+  location: data/processed/features.parquet
