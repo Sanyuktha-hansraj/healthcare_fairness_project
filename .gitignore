@@ -1,57 +1,113 @@
-# Dataset files (large)
+# ============================================
+# EXCLUDE FROM GIT (Large files & generated)
+# ============================================
+
+# Large dataset files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+ddidiversedermatologyimages.zip
+
+# Dataset images (regenerated from source)
+DDI/images/
 DDI/images/*.png
-DDI/*.csv
+DDI/images/*.jpg
+DDI/images/*.jpeg
 
-
-# Data
+# Processed/generated data
 data/raw/*
 data/processed/*
 data/interim/*
-!data/*/.gitkeep
+data/*.csv
+data/*.parquet
 
-# Python
+# All CSV files (datasets)
+*.csv
+
+# Python cache & bytecode
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
-.Python
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
 env/
 venv/
 .venv/
 ENV/
+.Python
 
-# Jupyter
+# Jupyter checkpoints & outputs
 .ipynb_checkpoints/
-*.ipynb_checkpoints
+*.ipynb_checkpoints/
 
-# VS Code
+# IDE & editors
 .vscode/
+.idea/
 *.code-workspace
+*.swp
+*~
 
-# Models
+# Model files (large trained models)
 models/*.pt
+models/*.pth
 models/*.h5
 models/*.pkl
-models/*.pth
+models/*.weights
+models/*.ckpt
 
-# Reports (keep structure)
-reports/figures/*.png
-reports/figures/*.pdf
+# Generated reports & figures
+reports/figures/**/*.png
+reports/figures/**/*.pdf
+reports/figures/**/*.jpg
 reports/*.csv
-!reports/*/.gitkeep
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
 desktop.ini
+*.lnk
 
 # Logs
 *.log
+logs/
 
-# Streamlit
+# Streamlit cache
 .streamlit/
 
-# Temporary
+# Temporary files
 *.tmp
-*.swp
-*~
+*.temp
+*.bak
+
+
+# ============================================
+# INCLUDE IN GIT (Source code & config)
+# ============================================
+
+# Keep directory structure (optional)
+!data/.gitkeep
+!reports/.gitkeep
+!reports/figures/.gitkeep
+
+# Include config files
+!config/*.yml
+!config/*.yaml
+
+# Include source code
+!src/**/*.py
+!dashboard/**/*.py
+!notebooks/*.ipynb
+
+# Include documentation
+!README.md
+!reports/*.md
+!*.md
+
+# Include requirements
+!requirements.txt
