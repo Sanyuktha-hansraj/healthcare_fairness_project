@@ -1,8 +1,7 @@
 # Dataset files (large)
 DDI/images/*.png
 DDI/*.csv
-*.zip
-ddidiversedermatologyimages.zip
+
 
 # Data
 data/raw/*
