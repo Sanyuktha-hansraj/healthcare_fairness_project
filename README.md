@@ -1,366 +1,407 @@
-# 🏥 Healthcare Fairness ML Project
-## Detecting Algorithmic Bias in Skin Lesion Classification
+# 🏥 Healthcare Fairness ML: Bias Detection in Skin Lesion Classification
 
-A comprehensive framework for evaluating and mitigating fairness issues in healthcare AI, specifically focused on detecting bias in skin lesion malignancy prediction across different skin tone groups using the Diverse Dermatology Images (DDI) dataset.
+A Responsible AI and Healthcare Machine Learning project focused on identifying demographic disparities in dermatology datasets and developing fairness-aware evaluation workflows for skin lesion classification.
 
 ---
 
 ## 📋 Table of Contents
-- [Overview](#overview)
-- [Problem Statement](#problem-statement)
-- [Key Features](#key-features)
-- [Dataset](#dataset)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Fairness Metrics](#fairness-metrics)
-- [Results](#results)
-- [Dashboard](#dashboard)
-- [Contributing](#contributing)
+
+* [Overview](#overview)
+* [Problem Statement](#problem-statement)
+* [Key Features](#key-features)
+* [Dataset](#dataset)
+* [Key Findings](#key-findings)
+* [Project Structure](#project-structure)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Fairness Metrics](#fairness-metrics)
+* [Dashboard](#dashboard)
+* [Dependencies](#dependencies)
+* [Future Work](#future-work)
+* [References](#references)
+* [Author](#author)
 
 ---
 
-## 🎯 Overview
+# 🎯 Overview
 
-This project investigates **algorithmic bias in dermatological AI systems**, specifically examining whether skin lesion classification models perform equally well across different skin tone groups. Using the Fitzpatrick scale classification, we analyze fairness across three demographic groups:
+Healthcare AI systems can unintentionally perform differently across demographic groups, potentially leading to unequal healthcare outcomes.
 
-- **Fitzpatrick I-II** (Light skin)
-- **Fitzpatrick III-IV** (Medium skin)
-- **Fitzpatrick V-VI** (Dark skin)
+This project investigates fairness in dermatological AI using the Diverse Dermatology Images (DDI) dataset. It focuses on analyzing differences across Fitzpatrick skin tone groups and building a configurable framework for fairness-aware model evaluation.
 
-The analysis includes multiple fairness metrics, bias detection, and mitigation strategies to ensure equitable healthcare outcomes.
+The project combines:
 
----
+* Healthcare Data Science
+* Responsible AI
+* Fairness in Machine Learning
+* Medical Image Analytics
+* Exploratory Data Analysis
+* Interactive Dashboard Development
 
-## ⚠️ Problem Statement
-
-Healthcare AI systems have been shown to exhibit disparate performance across demographic groups, leading to potential healthcare inequities. Dermatological AI is particularly susceptible to bias due to:
-
-1. **Dataset bias** - underrepresentation of darker skin tones in training data
-2. **Model performance disparity** - lower accuracy for underrepresented groups
-3. **Clinical impact** - missed diagnoses can lead to serious health consequences
-
-This project quantifies and addresses these fairness issues in skin lesion classification.
+The long-term goal is to build fairness-aware machine learning pipelines that support equitable healthcare AI development.
 
 ---
 
-## ✨ Key Features
+# ⚠️ Problem Statement
 
-- **Fairness-Focused Analysis**: Multiple fairness metrics including:
-  - Demographic Parity
-  - Equal Opportunity
-  - Equalized Odds
-  - Calibration Within Groups
+Machine learning models used in healthcare may perform differently across demographic groups.
 
-- **Comprehensive EDA**: Exploratory data analysis with demographic breakdowns and outcome disparities
+In dermatology, this issue is particularly important because:
 
-- **Configurable Pipeline**: YAML-based configuration for easy customization of metrics and thresholds
+* Darker skin tones are often underrepresented in medical datasets.
+* Performance disparities may contribute to delayed or missed diagnosis.
+* Healthcare AI systems should be evaluated for fairness before clinical deployment.
 
-- **Interactive Dashboard**: Streamlit-based dashboard for visualizing fairness metrics and model performance
-
-- **Feature Engineering**: Automated extraction of image statistics and metadata features
-
-- **Extensible Framework**: Modular design for adding new metrics and mitigation strategies
+This project aims to identify dataset-level disparities and prepare a fairness-aware evaluation framework for future model development.
 
 ---
 
-## 📊 Dataset
+# ✨ Key Features
 
-**Diverse Dermatology Images (DDI)**
+## Fairness-Focused Analysis
 
-- **Total Images**: 656 dermoscopy images
-- **Classes**: Malignant (26.1%) and Benign (73.9%) skin lesions
-- **Diversity**: Balanced representation across Fitzpatrick skin tone groups
-- **Format**: PNG images with associated metadata
+The project includes fairness metric configuration, exploratory bias analysis, and a framework for future mitigation strategies.
+
+Configured metrics include:
+
+* Demographic Parity
+* Equal Opportunity
+* Equalized Odds
+* Calibration Within Groups
+
+## Exploratory Data Analysis
+
+* Demographic breakdowns
+* Skin tone distribution analysis
+* Malignancy rate analysis
+* Outcome disparity assessment
+
+## Interactive Dashboard
+
+Built using Streamlit for:
+
+* Dataset exploration
+* Cohort analysis
+* Fairness observations
+* Statistical summaries
+
+## Configurable Pipeline
+
+YAML-based configuration enables reproducible experiments and fairness evaluation settings.
+
+## Feature Engineering
+
+Automated extraction and preparation of metadata-derived features for future modeling tasks.
+
+---
+
+# 📊 Dataset
+
+## Diverse Dermatology Images (DDI)
+
+The DDI dataset was created to improve representation of diverse skin tones in dermatology research.
+
+### Dataset Summary
+
+| Attribute         | Value                    |
+| ----------------- | ------------------------ |
+| Total Images      | 656                      |
+| Malignant Lesions | 171                      |
+| Benign Lesions    | 485                      |
+| Skin Tone Groups  | 3 Fitzpatrick Categories |
 
 ### Skin Tone Distribution
-```
-Fitzpatrick I-II    (208 images)
-Fitzpatrick III-IV  (241 images)
-Fitzpatrick V-VI    (207 images)
-```
 
-**Note**: This project uses the DDI dataset. Ensure you have proper permissions and cite the original dataset in your work.
+| Fitzpatrick Group  | Images |
+| ------------------ | ------ |
+| Fitzpatrick I-II   | 208    |
+| Fitzpatrick III-IV | 241    |
+| Fitzpatrick V-VI   | 207    |
+
+**Note:** Please ensure proper licensing and citation when using the DDI dataset.
 
 ---
 
-## 📁 Project Structure
+# 📈 Key Findings
 
-```
+## Dataset Characteristics
+
+* Total images analyzed: 656
+* Malignant lesions: 171
+* Benign lesions: 485
+* All demographic groups contain sufficient samples for cohort-level analysis
+* 12 engineered features prepared for future model development
+
+## Outcome Distribution
+
+| Skin Tone Group    | Total Images | Malignant Cases | Malignancy Rate |
+| ------------------ | ------------ | --------------- | --------------- |
+| Fitzpatrick I-II   | 208          | 49              | 23.56%          |
+| Fitzpatrick III-IV | 241          | 74              | 30.71%          |
+| Fitzpatrick V-VI   | 207          | 48              | 23.19%          |
+
+## Fairness Observation
+
+The Fitzpatrick III-IV cohort demonstrates a higher malignancy prevalence compared with the other groups.
+
+While this does not indicate algorithmic bias by itself, it highlights the importance of fairness-aware evaluation during model development.
+
+**Outcome disparity observed across groups: 7.52 percentage points**
+
+---
+
+# 📁 Project Structure
+
+```text
 fairness_project/
-├── config/                          # Configuration files
-│   ├── fairness.yml                # Fairness metrics & thresholds
-│   └── features.yml                # Feature engineering config
-├── src/                            # Source code
-│   ├── data_loader.py             # Dataset loading utilities
-│   ├── fairness_metrics.py        # Fairness evaluation classes
-│   ├── features.py                # Feature extraction pipeline
-│   └── __init__.py
-├── dashboard/                       # Streamlit dashboard
-│   ├── app.py                      # Main dashboard app
-│   └── pages/                      # Multi-page dashboard
+├── config/
+│   ├── fairness.yml
+│   └── features.yml
+│
+├── dashboard/
+│   ├── app.py
+│   └── pages/
 │       └── 01_eda_cohort.py
-├── notebooks/                       # Jupyter notebooks
-│   └── 02_eda.ipynb               # Exploratory data analysis
-├── data/                           # Data directory
-│   └── processed/                  # Processed data & features
-│       └── feature_list.json
-├── DDI/                            # Dataset location
-│   ├── ddi_metadata.csv           # Dataset metadata
-│   └── images/                     # Dermoscopy images
-├── reports/                        # Analysis reports & logs
-│   ├── log.md                     # Week 1 analysis log
-│   ├── week2_log.md               # Week 2 progress
-│   └── figures/                    # Saved visualizations
-├── requirements.txt                # Python dependencies
-└── README.md                       # This file
+│
+├── notebooks/
+│   └── 02_eda.ipynb
+│
+├── reports/
+│   ├── log.md
+│   ├── week2_log.md
+│   └── figures/
+│
+├── src/
+│   ├── data_loader.py
+│   ├── fairness_metrics.py
+│   ├── features.py
+│   └── __init__.py
+│
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-## 🚀 Getting Started
+# 🚀 Installation
 
-### Prerequisites
-- Python 3.9+
-- pip or conda
-- Virtual environment (recommended)
+## Clone Repository
 
-### Installation
+```bash
+git clone https://github.com/Sanyuktha-hansraj/healthcare_fairness_project.git
+cd healthcare_fairness_project
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd fairness_project
-   ```
+## Create Virtual Environment
 
-2. **Create and activate virtual environment**
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
+```bash
+python -m venv .venv
+```
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Windows
 
-4. **Configure the project**
-   - Ensure your DDI dataset is in the `DDI/` directory
-   - Review and customize `config/fairness.yml` if needed
+```bash
+.venv\Scripts\activate
+```
+
+### Linux/Mac
+
+```bash
+source .venv/bin/activate
+```
+
+## Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
-## 💻 Usage
+# 💻 Usage
 
-### 1. Exploratory Data Analysis
-Run the EDA notebook to understand dataset characteristics:
+## Run Exploratory Data Analysis
+
 ```bash
 jupyter notebook notebooks/02_eda.ipynb
 ```
 
-### 2. Load Dataset
+## Launch Dashboard
+
+```bash
+streamlit run dashboard/app.py
+```
+
+## Example Dataset Loading
+
 ```python
 from src.data_loader import DDI_DataLoader
 
 loader = DDI_DataLoader(root_dir="./DDI")
-df = loader.get_data()
+df = loader.get_metadata()
 ```
 
-### 3. Calculate Fairness Metrics
+## Example Fairness Evaluation
+
 ```python
 from src.fairness_metrics import FairnessEvaluator
 
 evaluator = FairnessEvaluator(
     y_true=y_true,
     y_pred=y_pred,
-    y_prob=y_proba,
+    y_prob=y_prob,
     sensitive_attr=skin_tone_groups
 )
 
 dpd = evaluator.demographic_parity_difference()
-eod = evaluator.equal_opportunity_difference()
 ```
 
-### 4. Launch Interactive Dashboard
-```bash
-streamlit run dashboard/app.py
+---
+
+# 📐 Fairness Metrics
+
+## Demographic Parity
+
+Measures whether positive prediction rates remain similar across demographic groups.
+
+**Threshold:** < 0.1
+
+## Equal Opportunity
+
+Measures whether true positive rates remain similar across demographic groups.
+
+**Threshold:** < 0.1
+
+## Equalized Odds
+
+Measures whether both true positive rates and false positive rates remain similar across groups.
+
+**Threshold:** < 0.1
+
+## Calibration Within Groups
+
+Measures whether predicted probabilities correspond to actual outcomes within each demographic group.
+
+**Threshold:** < 0.05
+
+---
+
+# 📊 Dashboard
+
+## Current Dashboard Features
+
+### Main Dashboard
+
+* Project overview
+* Dataset summary statistics
+* Navigation interface
+
+### Cohort Analysis Page
+
+Implemented in:
+
+```text
+dashboard/pages/01_eda_cohort.py
 ```
 
-The dashboard provides:
-- Model performance by skin tone group
-- Fairness metric visualizations
-- Outcome disparity analysis
-- Detailed cohort comparisons
+Features:
 
----
+* Dataset overview metrics
+* Skin tone distribution visualization
+* Malignancy rates by demographic group
+* Outcome disparity analysis
+* Statistical summaries
+* Initial fairness observations
 
-## 📐 Fairness Metrics
+## Launch Dashboard
 
-### Demographic Parity
-**Definition**: Equal positive prediction rates across groups
-- **Formula**: $\max(P(\hat{Y}=1|A=a)) - \min(P(\hat{Y}=1|A=a))$
-- **Threshold**: < 0.1
-- **Interpretation**: Measures if model predicts positive outcomes equally for all groups
-
-### Equal Opportunity
-**Definition**: Equal true positive rates (sensitivity) across groups
-- **Formula**: $\max(TPR_a) - \min(TPR_a)$
-- **Threshold**: < 0.1
-- **Clinical Importance**: Ensures all skin tones have equal detection of malignant lesions
-
-### Equalized Odds
-**Definition**: Equal TPR and FPR across groups
-- **Formula**: $\max(TPR_{diff}, FPR_{diff})$
-- **Threshold**: < 0.1
-- **Interpretation**: Balances both error types across demographic groups
-
-### Calibration Within Groups
-**Definition**: Predicted probabilities match actual outcomes for each group
-- **Formula**: $E[Y|\hat{Y}=p,A=a] \approx p$ for all groups
-- **Threshold**: < 0.05
-- **Importance**: Model confidence should be reliable for all skin tones
-
----
-
-## 📈 Results Summary
-
-### Week 2 Analysis Findings
-
-**Dataset Characteristics:**
-- Total images analyzed: 656
-- Class distribution: 26.1% malignant, 73.9% benign
-- All demographic groups have adequate sample sizes (>30)
-
-**Fairness Observations:**
-- Outcome disparity between groups: **7.52 percentage points**
-- Fitzpatrick III-IV group has higher malignancy rate (30.71%) vs. others (~23%)
-- Ready for fairness-aware model development and mitigation strategies
-
-### Group Performance Breakdown
-| Skin Tone Group | Total Images | Malignant | Malignancy Rate |
-|---|---|---|---|
-| Fitzpatrick I-II | 208 | 49 | 23.56% |
-| Fitzpatrick III-IV | 241 | 74 | 30.71% |
-| Fitzpatrick V-VI | 207 | 48 | 23.19% |
-
----
-
-## 📊 Dashboard
-
-The Streamlit dashboard provides interactive visualization of:
-
-1. **Main Dashboard** (`app.py`)
-   - Project overview
-   - Quick statistics
-   - Navigation to analysis pages
-
-2. **Cohort Analysis** (`pages/01_eda_cohort.py`)
-   - Demographic breakdowns
-   - Fairness metric comparisons
-   - Model performance by group
-   - Statistical testing
-
-Access the dashboard:
 ```bash
 streamlit run dashboard/app.py
 ```
 
 ---
 
-## 🔧 Configuration
+# 📸 Dashboard Preview
 
-### Fairness Configuration (`config/fairness.yml`)
+Add screenshots here after exporting figures from Streamlit.
 
-Customize fairness thresholds and metric parameters:
+### Dataset Overview
 
-```yaml
-fairness_metrics:
-  demographic_parity:
-    threshold: 0.1
-    
-  equal_opportunity:
-    threshold: 0.1
-    
-  equalized_odds:
-    threshold: 0.1
-    
-  calibration_within_groups:
-    threshold: 0.05
-```
+![Dataset Overview](README_assets/dataset_overview.png)
 
-### Feature Configuration (`config/features.yml`)
+### Skin Tone Distribution
 
-Define which features to extract and use for modeling.
+![Skin Tone Distribution](README_assets/skin_tone_distribution.png)
+
+### Malignancy Rates by Group
+
+![Malignancy Distribution](README_assets/malignancy_distribution.png)
 
 ---
 
-## 📚 Key Dependencies
+# 📚 Dependencies
 
-| Package | Version | Purpose |
-|---|---|---|
-| pandas | ≥2.0.0 | Data processing |
-| numpy | ≥1.24.0 | Numerical computing |
-| PyTorch | ≥2.0.0 | Deep learning |
-| scikit-learn | ≥1.3.0 | ML & metrics |
-| fairlearn | ≥0.9.0 | Fairness algorithms |
-| Streamlit | ≥1.25.0 | Dashboard |
-| matplotlib/seaborn | Latest | Visualization |
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Areas for improvement:
-
-- [ ] Additional fairness metrics (e.g., Disparate Impact, Individual Fairness)
-- [ ] Bias mitigation techniques (reweighting, threshold optimization, debiasing algorithms)
-- [ ] Model implementations with fairness constraints
-- [ ] Extended demographic attributes beyond skin tone
-- [ ] Statistical testing suite
-- [ ] Performance optimization
+| Package      | Purpose                   |
+| ------------ | ------------------------- |
+| Pandas       | Data processing           |
+| NumPy        | Numerical computing       |
+| PyTorch      | Deep learning             |
+| Scikit-learn | Machine learning          |
+| Fairlearn    | Fairness evaluation       |
+| Streamlit    | Dashboard development     |
+| Matplotlib   | Visualization             |
+| Seaborn      | Statistical visualization |
 
 ---
 
-## 📖 References & Citations
+# 🔬 Future Work
 
-### Key Papers
-- Buolamwini, B., & Gebru, T. (2018). "Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification". Conference on Fairness, Accountability and Transparency.
-- Tan, B. L., et al. (2022). "Fitzpatrick Scale and Dermatology Research: Concerns and Recommendations".
-
-### Datasets
-- Diverse Dermatology Images (DDI) Dataset
-
-### Tools & Libraries
-- [fairlearn](https://fairlearn.org/) - Microsoft's fairness toolkit
-- [Streamlit](https://streamlit.io/) - Dashboard framework
+* Baseline skin lesion classification models
+* Fairness-aware model evaluation
+* Bias mitigation techniques
+* Reweighting approaches
+* Threshold optimization
+* Calibration analysis
+* Model comparison dashboard
+* Clinical fairness benchmarking
 
 ---
 
-## 📝 License
+# 📖 References
 
-[Specify your license here - e.g., MIT, Apache 2.0, etc.]
+## Dataset
 
----
+* Diverse Dermatology Images (DDI) Dataset
 
-## 👤 Contact & Support
+## Libraries
 
-For questions, issues, or suggestions, please [create an issue](../../issues) or contact the project maintainers.
-
----
-
-## 📌 Citation
-
-If you use this project in your work, please cite:
-
-```
-@project{healthcarefairness2025,
-  title={Healthcare Fairness ML Project},
-  subtitle={Detecting Algorithmic Bias in Skin Lesion Classification},
-  year={2025}
-}
-```
+* Fairlearn
+* Streamlit
+* PyTorch
+* Scikit-learn
+* Pandas
+* NumPy
 
 ---
 
-**Last Updated**: 2025-11-24  
-**Project Status**: Active Development
+# 👩‍💻 Author
+
+**Sanyuktha Hansraj**
+
+MSc Data Analytics with Bio AI
+Digital University Kerala
+
+
+GitHub: https://github.com/Sanyuktha-hansraj
+
+---
+
+# 📝 License
+
+This project is intended for educational and research purposes. Please ensure proper attribution and citation of the DDI dataset when using this work.
+
+---
+
+# 🚀 Status
+
+**Active Development**
